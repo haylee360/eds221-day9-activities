@@ -66,14 +66,17 @@ mack_creek_lengths <- mack_creek_vertebrates %>%
 
 ```{r}
 #Trying with minimum info
-mack_creek_lengths <- mack_creek_vertebrates %>% 
-  mutate(across(where(is.character, tolower)))
+library(tidyverse)
+library(here)
+
+set_here(path = "C:/Users/Haylee/MEDS/EDS-221/eds221-day9/eds221-day9-activities")
+
+mack_creek_vertebrates <- read_csv(here("AS00601.csv"))
 
 mack_creek_lengths <- mack_creek_vertebrates %>% 
   mutate(across(where(is.character, tolower)))
-#> Error in mack_creek_vertebrates %>% mutate(across(where(is.character, : could not find function "%>%"
 
-# Still having the same issue
+
 ```
 
 ### reprex 2
@@ -104,6 +107,11 @@ mack_creek_vertebrates %>%
 #> Error in mack_creek_vertebrates %>% clean_names() %>% filter(species == : could not find function "%>%"
 
 # Again, same issue as above reprex 
+
+mack_creek_vertebrates %>% 
+  clean_names() %>% 
+  ggplot(aes(x = length1, y = weight)) +
+         geom_point(aes(shape = 12), color = "purple")
 ```
 
 
